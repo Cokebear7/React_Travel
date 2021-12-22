@@ -39,6 +39,9 @@ export const Header: React.FC = () => {
   const jwt = useSelector(s => s.user.token)
   const [username, setUsername] = useState("")
 
+  const shoppingCartItems = useSelector(s => s.shoppingCart.items)
+  const shoppingCartLoading = useSelector(s => s.shoppingCart.loading)
+
   useEffect(()=>{
     if(jwt){
       const token = jwt_decode<JwtPayload>(jwt)
@@ -50,7 +53,7 @@ export const Header: React.FC = () => {
     console.log(e);
     if (e.key === "new") {
       // 处理新语言添加action
-      dispatch(addLanguageActionCreator("新语言", "new_lang"));
+      dispatch(addLanguageActionCreator("new language", "new_lang"));
     } else {
       dispatch(changeLanguageActionCreator(e.key));
     }
@@ -81,7 +84,7 @@ export const Header: React.FC = () => {
             }
             icon={<GlobalOutlined />}
           >
-            {language === "zh" ? "中文" : "English"}
+            {language === "en" ? "中文" : "English"}
           </Dropdown.Button>
           {jwt ? (
             <Button.Group className={styles["button-group"]}>
@@ -89,7 +92,12 @@ export const Header: React.FC = () => {
                 {t("header.welcome")}
                 <Typography.Text strong>{username}</Typography.Text>
               </span>
-              <Button>{t("header.shoppingCart")}</Button>
+              <Button
+                loading={shoppingCartLoading}
+                onClick={() => history.push("/shoppingCart")}
+              >
+                {t("header.shoppingCart")}({shoppingCartItems.length})
+              </Button>
               <Button onClick={onLogout}>{t("header.signOut")}</Button>
             </Button.Group>
           ) : (
@@ -112,7 +120,7 @@ export const Header: React.FC = () => {
           </Typography.Title>
         </span>
         <Input.Search
-          placeholder={"请输入旅游目的地、主题、或关键字"}
+          placeholder={t("header.search")}
           className={styles["search-input"]}
           onSearch={(keywords) => history.push("/search/" + keywords)}
         />
@@ -128,11 +136,11 @@ export const Header: React.FC = () => {
         <Menu.Item key="8"> {t("header.local")} </Menu.Item>
         <Menu.Item key="9"> {t("header.theme")} </Menu.Item>
         <Menu.Item key="10"> {t("header.custom")} </Menu.Item>
-        <Menu.Item key="11"> {t("header.study")} </Menu.Item>
-        <Menu.Item key="12"> {t("header.visa")} </Menu.Item>
-        <Menu.Item key="13"> {t("header.enterprise")} </Menu.Item>
-        <Menu.Item key="14"> {t("header.high_end")} </Menu.Item>
+        <Menu.Item key="11"> {t("header.study")} </Menu.Item>   
+        {/* <Menu.Item key="13"> {t("header.enterprise")} </Menu.Item> */}
+        {/* <Menu.Item key="14"> {t("header.high_end")} </Menu.Item> */}
         <Menu.Item key="15"> {t("header.outdoor")} </Menu.Item>
+        <Menu.Item key="12"> {t("header.visa")} </Menu.Item>
         <Menu.Item key="16"> {t("header.insurance")} </Menu.Item>
       </Menu>
     </div>

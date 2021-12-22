@@ -9,7 +9,7 @@ import {
   ProductIntro,
   ProductComments,
 } from "../../components";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Button } from "antd";
 import { commentMockData } from "./mockup";
 import {
   productDetailSlice,
@@ -18,6 +18,8 @@ import {
 import { useSelector } from "../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { MainLayout } from "../../layouts/mainLayout";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { addShoppingCartItem } from "../../redux/shoppingCart/slice";
 
 const { RangePicker } = DatePicker;
 
@@ -36,6 +38,9 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
   const product = useSelector((state) => state.productDetail.data);
 
   const dispatch = useDispatch();
+
+  const jwt = useSelector(s => s.user.token) as string
+  const shoppingCartLoading = useSelector(s => s.shoppingCart.loading)
 
   useEffect(() => {
     dispatch(getProductDetail(touristRouteId));
@@ -75,6 +80,20 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
             />
           </Col>
           <Col span={11}>
+            <Button
+              style={{ marginTop: 50, marginBottom: 30, display: "block" }}
+              type="primary"
+              danger
+              loading={shoppingCartLoading}
+              onClick={() => {
+                dispatch(
+                  addShoppingCartItem({ jwt, touristRouteId: product.id })
+                );
+              }}
+            >
+              <ShoppingCartOutlined />
+              Add to Shopping Cart
+            </Button>
             <RangePicker open style={{ marginTop: 20 }} />
           </Col>
         </Row>
@@ -83,16 +102,16 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = () => {
       <Anchor className={styles["product-detail-anchor"]}>
         <Menu mode="horizontal">
           <Menu.Item key="1">
-            <Anchor.Link href="#feature" title="产品特色"></Anchor.Link>
+            <Anchor.Link href="#feature" title="Feature"></Anchor.Link>
           </Menu.Item>
           <Menu.Item key="3">
-            <Anchor.Link href="#fees" title="费用"></Anchor.Link>
+            <Anchor.Link href="#fees" title="Price"></Anchor.Link>
           </Menu.Item>
           <Menu.Item key="4">
-            <Anchor.Link href="#notes" title="预订须知"></Anchor.Link>
+            <Anchor.Link href="#notes" title="Notes"></Anchor.Link>
           </Menu.Item>
           <Menu.Item key="5">
-            <Anchor.Link href="#comments" title="用户评价"></Anchor.Link>
+            <Anchor.Link href="#comments" title="Comments"></Anchor.Link>
           </Menu.Item>
         </Menu>
       </Anchor>

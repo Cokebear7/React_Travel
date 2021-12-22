@@ -23,7 +23,8 @@
         "insurance":"保险",
         "shoppingCart": "购物车",
         "signOut": "注销",
-        "welcome": "欢迎回来 "
+        "welcome": "欢迎回来  ",
+        "search": "请输入旅游目的地、主题、或关键字"
     },
     "footer": {
         "detail" : "版权所有 @ React 旅游网"

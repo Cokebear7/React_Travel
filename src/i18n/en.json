@@ -1,6 +1,6 @@
 {
     "header": {
-        "slogan": "Make travel happier",
+        "slogan": "Make Travel Happier",
         "add_new_language": "add new language",
         "title": "React Travel",
         "register":"Register",
@@ -11,7 +11,7 @@
         "backpack": "Backpack",
         "private": "Private",
         "cruise": "Cruise",
-        "hotel": "Hotel & Attractions",
+        "hotel": "Hotel",
         "local": "Local",
         "theme": "Theme",
         "custom": "Custom",
@@ -23,7 +23,8 @@
         "insurance":"Insurance",
         "shoppingCart": "Shopping Cart",
         "signOut": "Sign Out",
-        "welcome": "Welcome back "
+        "welcome": "Welcome back  ",
+        "search": "Please enter travel destination, theme, or keyword"
     },
     "footer": {
         "detail" : "All rights reserved @ ReactTravel.com"
