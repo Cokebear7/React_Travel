@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
             }
             icon={<GlobalOutlined />}
           >
-            {language === "en" ? "中文" : "English"}
+            {language === "en" ? "English" : "中文"}
           </Dropdown.Button>
           {jwt ? (
             <Button.Group className={styles["button-group"]}>

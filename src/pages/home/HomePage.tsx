@@ -62,7 +62,7 @@ class HomePageComponent extends React.Component<PropsType> {
       );
     }
     if (error) {
-      return <div>网站出错：{error}</div>;
+      return <div>Error:{error}</div>;
     }
     return (
       <MainLayout>
